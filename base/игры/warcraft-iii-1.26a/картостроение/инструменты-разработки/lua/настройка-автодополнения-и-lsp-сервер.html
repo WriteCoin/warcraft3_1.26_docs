@@ -15234,6 +15234,32 @@
   </style>
 
 
+  <!-- Graph View Data -->
+  <script>
+    let nodes = {
+      "nodeCount": 13,
+      "linkCount": 15,
+      "radii": [7, 7, 6.984375, 6.984375, 6.4375, 6.4375, 6.4375, 5.109375, 5.109375, 5.109375, 5.109375, 5.109375, 5.109375],
+      "labels": ["Картостроение", "UjAPI", "Инструменты разработки", "lua", "Сборка карты", "sdk", "WarCraft III - 1.26a", "Устройство сетевой игры", "Настройка автодополнения и lsp-сервер", "jass", "Режим разработки", "Обновление и настройка", "Преобразование из числа в строку равкода"],
+      "paths": ["base/игры/warcraft-iii-1.26a/картостроение/картостроение.html", "base/игры/warcraft-iii-1.26a/картостроение/ujapi/ujapi.html", "base/игры/warcraft-iii-1.26a/картостроение/инструменты-разработки/инструменты-разработки.html", "base/игры/warcraft-iii-1.26a/картостроение/инструменты-разработки/lua/lua.html", "base/игры/warcraft-iii-1.26a/картостроение/инструменты-разработки/lua/сборка-карты/сборка-карты.html", "base/игры/warcraft-iii-1.26a/картостроение/ujapi/sdk/sdk.html", "base/игры/warcraft-iii-1.26a/warcraft-iii-1.26a.html", "base/игры/warcraft-iii-1.26a/устройство-сетевой-игры.html", "base/игры/warcraft-iii-1.26a/картостроение/инструменты-разработки/lua/настройка-автодополнения-и-lsp-сервер.html", "base/игры/warcraft-iii-1.26a/картостроение/инструменты-разработки/jass/jass.html", "base/игры/warcraft-iii-1.26a/картостроение/ujapi/режим-разработки.html", "base/игры/warcraft-iii-1.26a/картостроение/ujapi/обновление-и-настройка.html", "base/игры/warcraft-iii-1.26a/картостроение/ujapi/sdk/преобразование-из-числа-в-строку-равкода.html"],
+      "linkSources": [7, 0, 0, 1, 1, 11, 10, 2, 12, 9, 3, 5, 8, 4, 4],
+      "linkTargets": [6, 1, 6, 1, 0, 1, 1, 0, 5, 2, 2, 1, 3, 3, 1]
+    };
+    let attractionForce = 1;
+    let linkLength = 10;
+    let repulsionForce = 150;
+    let centralForce = 3;
+    let edgePruning = 100;
+  </script>
+
+  <script type="module" src="lib/scripts/graph_view.js"></script>
+
+  <script src="lib/scripts/graph_wasm.js"></script>
+
+  <script src="lib/scripts/tinycolor.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.2.4/pixi.min.js" integrity="sha512-Ch/O6kL8BqUwAfCF7Ie5SX1Hin+BJgYH4pNjRqXdTEqMsis1TUYg+j6nnI9uduPjGaj7DN4UKCZgpvoExt6dkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   <script>
     //#region Helpers
 
@@ -16055,7 +16081,7 @@
 
 </head>
 
-<body class="theme-dark mod-windows is-frameless is-hidden-frameless obsidian-app show-inline-title show-view-header is-maximized" style="--zoom-factor:1; --font-text-size:16px; --line-width:50em; --line-width-adaptive:50em; --file-line-width:50em; --content-width:500em; --sidebar-width:25em; --collapse-arrow-size:0.4em; --tree-horizontal-spacing:1em; --tree-vertical-spacing:0.5em; --sidebar-margin:12px;">
+<body class="theme-dark mod-windows is-frameless is-hidden-frameless obsidian-app show-inline-title show-view-header" style="--zoom-factor:1; --font-text-size:16px; --line-width:50em; --line-width-adaptive:50em; --file-line-width:50em; --content-width:500em; --sidebar-width:25em; --collapse-arrow-size:0.4em; --tree-horizontal-spacing:1em; --tree-vertical-spacing:0.5em; --sidebar-margin:12px;">
   <div class="webpage-container">
     <div class="sidebar-left sidebar">
       <div class="sidebar-content">
@@ -16063,7 +16089,7 @@
             <div class="toggle-background"></div>
           </label></div>
         <div class="tree-container file-tree mod-nav-indicator" data-depth="0">
-          <div class="tree-header"><span class="sidebar-section-header">Zettelkasten</span><button class="clickable-icon collapse-tree-button is-collapsed"><iconify-icon icon="ph:arrows-in-line-horizontal-bold" width="18px" height="18px" rotate="90deg" color="currentColor"></iconify-icon></button></div>
+          <div class="tree-header"><span class="sidebar-section-header">Warcraft3-1.26-docs</span><button class="clickable-icon collapse-tree-button is-collapsed"><iconify-icon icon="ph:arrows-in-line-horizontal-bold" width="18px" height="18px" rotate="90deg" color="currentColor"></iconify-icon></button></div>
           <div class="tree-scroll-area">
             <div class="tree-item mod-tree-folder mod-collapsible is-collapsed" data-depth="1">
               <div class="tree-item-contents">
@@ -16283,7 +16309,16 @@
       </div>
     </div>
     <div class="sidebar-right sidebar">
-      <div class="sidebar-content">
+      <div class="sidebar-content"><span class="sidebar-section-header">Interactive Graph</span>
+        <div class="graph-view-placeholder">
+          <div class="graph-view-container">
+            <div class="graph-icon graph-expand" role="button" aria-label="Expand" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-arrow-up-right">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg></div>
+            <canvas id="graph-canvas" width="512px" height="512px"></canvas>
+          </div>
+        </div>
         <div class="tree-container outline-tree" data-depth="0">
           <div class="tree-header"><span class="sidebar-section-header">Table Of Contents</span><button class="clickable-icon collapse-tree-button"><iconify-icon icon="ph:arrows-in-line-horizontal-bold" width="18px" height="18px" rotate="90deg" color="currentColor"></iconify-icon></button></div>
           <div class="tree-scroll-area">
